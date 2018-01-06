@@ -1,5 +1,5 @@
 <template>
-	<v-toolbar fixed app :clipped-left="clipped">
+	<v-toolbar fixed app>
 		<v-toolbar-title v-text="title"></v-toolbar-title>
 		<v-spacer></v-spacer>
 		<v-btn icon :to="{path: '/search'}">
@@ -23,3 +23,14 @@
 		}
 	}
 </script>
+
+<style lang="scss">
+	.toolbar {
+		&__title {
+			font-family: 'Lobster', cursive;
+			color: #3f51b5;
+			letter-spacing: 1px;
+			font-size: 2em;
+		}
+	}
+</style>

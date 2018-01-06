@@ -8,7 +8,7 @@
 				</v-slide-y-transition>
 			</v-container>
 		</v-content>
-		<v-footer :fixed="fixed" app>
+		<v-footer app>
 			<span>&copy; 2018</span>
 		</v-footer>
 	</v-app>
@@ -25,3 +25,11 @@
 		}
 	}
 </script>
+
+<style lang="scss">
+	@media only screen and (min-width: 1264px) {
+		.container {
+			max-width: 1250px;
+		}
+	}
+</style>
