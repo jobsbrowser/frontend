@@ -23,16 +23,20 @@
 
 <script>
 	export default {
-		data () {
-			return {
-				chips: []
+		computed: {
+			chips: {
+				get: function () {
+					return this.$store.state.selectedTags
+				},
+				set: function (tags) {
+					this.$store.commit('updateTags', tags)
+				}
 			}
 		},
 
 		methods: {
 			remove (item) {
-				this.chips.splice(this.chips.indexOf(item), 1)
-				this.chips = [...this.chips]
+				this.$store.commit('removeTag', item)
 			}
 		}
 	}

@@ -1,7 +1,13 @@
 <template>
-	<h1>Search</h1>
+	<tag-input></tag-input>
 </template>
 
 <script>
-	export default {}
+	import TagInput from '../components/TagInput.vue'
+
+	export default {
+		components: {
+			'TagInput': TagInput
+		}
+	}
 </script>
