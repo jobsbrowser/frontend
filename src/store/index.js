@@ -15,5 +15,8 @@ export default new Vuex.Store({
 			state.selectedTags.splice(state.selectedTags.indexOf(tag), 1)
 			// state.selectedTags = [...state.selectedTags]
 		}
+	},
+	getters: {
+		getSelectedTags: state => state.selectedTags
 	}
 })

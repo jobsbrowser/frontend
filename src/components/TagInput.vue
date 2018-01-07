@@ -43,15 +43,4 @@
 </script>
 
 <style lang="scss">
-	.chip {
-		background: rgba(74, 50, 182, 0.2) !important;
-
-		&__close {
-			color: rgb(74, 50, 182) !important;
-		}
-
-		&--selected:after {
-			background-color: inherit;
-		}
-	}
 </style>
