@@ -6,7 +6,7 @@
 
 		<v-divider class="mb-5"></v-divider>
 
-		<ring-loader :loading="!dataLoaded" :size="'120px'" :color="'#3f51b5'"></ring-loader>
+		<clip-loader :loading="!dataLoaded" :size="'120px'" color="#7300B6"></clip-loader>
 
 		<div v-if="dataLoaded">
 			<v-layout row wrap class="ma-5">
@@ -36,7 +36,7 @@
 				Ilość przetworzonych ofert w czasie
 			</h5>
 
-			<line-chart :chart-data="offersCountData" :options="{legend: {display: false}}" :height="200"
+			<line-chart :chart-data="offersCountData" :options="{legend: {display: false}}" :height="100"
 						v-if="offersCountData">
 			</line-chart>
 		</div>
@@ -46,7 +46,7 @@
 <script>
 	import axios from 'axios'
 	import LineChart from '../components/LineChart.js'
-	import RingLoader from 'vue-spinner/src/RingLoader.vue'
+	import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
 
 	export default {
 		data () {
@@ -58,15 +58,14 @@
 			}
 		},
 		mounted () {
-			axios.get('/info').then((res) => {
-				console.log(res)
+			axios.get('/info/').then((res) => {
 				this.offersCountData = {
 					labels: res.data.days,
 					datasets: [
 						{
 							label: 'Ilość przetworzonych ofert',
 							data: res.data.offers_count,
-							backgroundColor: 'rgba(74, 50, 182, 0.15)'
+							backgroundColor: 'rgba(115, 0, 182, 0.15)'
 						}
 					]
 				}
@@ -77,7 +76,7 @@
 		},
 		components: {
 			'LineChart': LineChart,
-			'RingLoader': RingLoader
+			'ClipLoader': ClipLoader
 		}
 	}
 </script>

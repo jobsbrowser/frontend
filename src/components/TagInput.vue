@@ -14,6 +14,9 @@
 				close
 				@input="remove(data.item)"
 				:selected="data.selected"
+				:color="themes[theme].color"
+				:text-color="themes[theme].textColor"
+				dark
 			>
 				<strong>{{ data.item }}</strong>&nbsp;
 			</v-chip>
@@ -37,6 +40,21 @@
 		methods: {
 			remove (item) {
 				this.$store.commit('removeTag', item)
+			}
+		},
+		props: ['theme'],
+		data () {
+			return {
+				themes: {
+					pink: {
+						color: 'pink',
+						textColor: 'white'
+					},
+					green: {
+						color: 'green',
+						textColor: 'white'
+					}
+				}
 			}
 		}
 	}

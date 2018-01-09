@@ -7,8 +7,12 @@ import router from './router'
 import store from './store'
 
 import axios from 'axios'
+import qs from 'qs'
 
-axios.defaults.baseURL = 'http://localhost:9000'
+axios.defaults.baseURL = 'http://localhost:8000'
+axios.defaults.paramsSerializer = function (params) {
+	return qs.stringify(params, {indices: false})
+}
 
 Vue.use(Vuetify)
 

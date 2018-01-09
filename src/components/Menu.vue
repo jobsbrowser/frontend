@@ -28,7 +28,7 @@
 	.toolbar {
 		&__title {
 			font-family: 'Lobster', cursive;
-			color: #3f51b5;
+			color: #7300B6;
 			letter-spacing: 1px;
 			font-size: 2em;
 		}
