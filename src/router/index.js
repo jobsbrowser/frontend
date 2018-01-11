@@ -27,6 +27,6 @@ const router = new Router({
 		}
 	]
 })
-router.replace('/search')
+router.replace('/stats')
 
 export default router
