@@ -4,10 +4,15 @@
 		chips
 		tags
 		solo
+        autocomplete
+        hide-selected
+		clearable
+        dense
 		prepend-icon="search"
 		append-icon=""
-		clearable
 		v-model="chips"
+        v-bind:items="tags"
+        v-bind:filter="filterItem"
 	>
 		<template slot="selection" slot-scope="data">
 			<v-chip
@@ -25,8 +30,13 @@
 </template>
 
 <script>
+    import {mapGetters} from 'vuex'
+
 	export default {
 		computed: {
+            ...mapGetters({
+                tags: 'getAllTags'
+            }),
 			chips: {
 				get: function () {
 					return this.$store.state.selectedTags
@@ -38,6 +48,17 @@
 		},
 
 		methods: {
+            filterItem(item, queryText, itemText) {
+                const hasValue = val => val != null ? val : ''
+
+                const query = hasValue(queryText)
+                if(!query) return false;
+                const text = hasValue(itemText)
+
+                return text.toString()
+                .toLowerCase()
+                .indexOf(query.toString().toLowerCase()) > -1
+            },
 			remove (item) {
 				this.$store.commit('removeTag', item)
 			}

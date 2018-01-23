@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
 	state: {
-		selectedTags: []
+		selectedTags: [],
+    allTags: []
 	},
 	mutations: {
 		updateTags (state, tags) {
@@ -17,6 +19,14 @@ export default new Vuex.Store({
 		}
 	},
 	getters: {
-		getSelectedTags: state => state.selectedTags
+		getSelectedTags: state => state.selectedTags,
+		getAllTags: function(state) {
+      if(state.allTags.length > 0)
+        return state.allTags
+      axios.get('/tags/').then(res => {
+        state.allTags = res.data
+      })
+      return state.allTags
+    }
 	}
 })
