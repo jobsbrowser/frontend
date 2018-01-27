@@ -21,6 +21,23 @@
 			</h5>
 			<line-chart :chart-data="statsData.percentageCount" :options="{legend: {display: false}}" :height="100">
 			</line-chart>
+
+			<v-divider class="mt-5 mb-5"></v-divider>
+
+			<h5 class="headline grey--text text--darken-1 text-xs-center mt-5 mb-3">
+				Najczęściej zamieszczający ogłoszenia pracodawcy
+			</h5>
+			<doughnut-chart :chart-data="statsData.employers" :height="100">
+			</doughnut-chart>
+
+			<h5 class="headline grey--text text--darken-1 text-xs-center mt-5 mb-3">
+				Zbliżone (w modelu Word2Vec) technologie
+			</h5>
+			<v-layout row>
+				<v-flex xs4 offset-xs4 class="text-xs-center">
+					<v-chip v-for="tag in statsData.w2vTags" :key="tag" outline color="primary">{{ tag }}</v-chip>
+				</v-flex>
+			</v-layout>
 		</div>
 	</div>
 </template>
@@ -30,6 +47,7 @@
 	import debounce from 'debounce'
 	import { mapGetters } from 'vuex'
 	import LineChart from '../components/LineChart.js'
+	import DoughnutChart from '../components/DoughnutChart.js'
 	import TagInput from '../components/TagInput.vue'
 	import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
 	import VDivider from 'vuetify/src/components/VDivider/VDivider'
@@ -45,7 +63,8 @@
 			VDivider,
 			'TagInput': TagInput,
 			'ClipLoader': ClipLoader,
-			'LineChart': LineChart
+			'LineChart': LineChart,
+			'DoughnutChart': DoughnutChart
 		},
 		computed: {
 			...mapGetters({selectedTags: 'getSelectedTags'})
@@ -79,7 +98,21 @@
 									backgroundColor: 'rgba(0, 186, 82, 0.15)'
 								}
 							]
-						}
+						},
+						employers: {
+							labels: res.data.employers.map(obj => obj.name),
+							datasets: [
+								{
+									label: 'Pracodawcy',
+									data: res.data.employers.map(obj => obj.count),
+									backgroundColor: [
+										'#FF4081', '#2196F3', '#FFC107', '#9C27B0', '#FF5722',
+										'#616161', '#009688', '#4CAF50', '#3F51B5', '#795548'
+									]
+								}
+							]
+						},
+						w2vTags: res.data.most_similar_tags
 					}
 					this.loading = false
 				})

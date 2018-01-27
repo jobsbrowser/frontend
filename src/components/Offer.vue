@@ -5,10 +5,11 @@
 				<div class="headline" v-html="offer.job_title"></div>
 				<span class="grey--text" v-html="offer.employer"></span>
 			</v-flex>
-            <v-flex xs2 text-md-right>
-                <v-chip :key="offer.offer_id" disabled outline
-                        :color="chipColor">{{chipText}}</v-chip>
-            </v-flex>
+			<v-flex xs2 text-md-right>
+				<v-chip :key="offer.offer_id" disabled outline
+						:color="chipColor">{{chipText}}
+				</v-chip>
+			</v-flex>
 		</v-card-title>
 		<v-divider></v-divider>
 		<v-card-actions>
@@ -54,18 +55,18 @@
 				show: false
 			}
 		},
-        computed: {
-            isValid () {
-                const todayDate = new Date().toJSON().slice(0, 10)
-                return this.offer.valid_through >= todayDate
-            },
-            chipColor() {
-                return this.isValid ? 'green' : 'red'
-            },
-            chipText() {
-                return this.isValid ? 'Aktywna' : 'Wygasła'
-            }
-        }
+		computed: {
+			isValid () {
+				const todayDate = new Date().toJSON().slice(0, 10)
+				return this.offer.valid_through >= todayDate
+			},
+			chipColor () {
+				return this.isValid ? 'green' : 'red'
+			},
+			chipText () {
+				return this.isValid ? 'Aktywna' : 'Wygasła'
+			}
+		}
 	}
 </script>
 

@@ -6,16 +6,16 @@
 		<tag-input class="mb-4" theme="pink"></tag-input>
 		<v-divider class="mb-4"></v-divider>
 
-        <div class="text-xs-right">
-            <v-btn
-                @click="downloadOffers()"
-                color="purple"
-                class="white--text mb-4"
-            >
-                Pobierz oferty
-                <v-icon right dark>get_app</v-icon>
-            </v-btn>
-        </div>
+		<div class="text-xs-right">
+			<v-btn
+				@click="downloadOffers()"
+				color="purple"
+				class="white--text mb-4"
+			>
+				Pobierz oferty
+				<v-icon right dark>get_app</v-icon>
+			</v-btn>
+		</div>
 
 		<offer v-for="offer in offersList" :key="offer.offer_id" :offer="offer"></offer>
 
@@ -77,15 +77,15 @@
 					this.loadOffers(true)
 				}
 			},
-            downloadOffers () {
-                var searchParams = new URLSearchParams()
-                searchParams.append('export', true)
-                searchParams.append('from', '2017-12-01')
-                this.selectedTags.forEach(tag => {
-                    searchParams.append('tags', tag)
-                })
-                window.location.href = axios.defaults.baseURL + '/offers?' + searchParams.toString()
-            }
+			downloadOffers () {
+				let searchParams = new URLSearchParams()
+				searchParams.append('export', true)
+				searchParams.append('from', '2017-12-01')
+				this.selectedTags.forEach(tag => {
+					searchParams.append('tags', tag)
+				})
+				window.location.href = axios.defaults.baseURL + '/offers?' + searchParams.toString()
+			}
 		},
 		watch: {
 			'selectedTags': debounce(function (tags) {
