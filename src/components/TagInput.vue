@@ -2,12 +2,14 @@
 	<v-select
 		label="Klucze"
 		chips
-		tags
 		solo
         autocomplete
         hide-selected
 		clearable
         dense
+        multiple
+        deleteable-chips
+        no-data-text="Brak takiego klucza"
 		prepend-icon="search"
 		append-icon=""
 		v-model="chips"

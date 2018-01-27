@@ -15,8 +15,8 @@
 						Czym jest JobsBrowser?
 					</h5>
 					<p class="body-1">
-						JobsBrowser jest nadzędziem do automatycznej analizy rynku pracy IT.
-						Pozwala na wyszukiwanie ofert po oczekiwanych od kandydata umiejętnościach, oraz przeglądanie
+						JobsBrowser jest narzędziem do automatycznej analizy rynku pracy IT.
+						Pozwala na wyszukiwanie ofert po oczekiwanych od kandydata umiejętnościach oraz przeglądanie
 						statystyk dla każdej z występujących w bazie umiejętności.
 					</p>
 				</v-flex>
