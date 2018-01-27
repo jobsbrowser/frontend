@@ -10,6 +10,19 @@
 		<clip-loader :loading="loading" :size="'120px'" color="#00BA52"></clip-loader>
 
 		<div v-if="statsData && !loading">
+			<div v-if="selectedTags.length > 1">
+				<h5 class="display-1 grey--text text--darken-1 text-xs-center mt-5 mb-3">
+					Porównanie tagów z osobna (pod względem ilości ofert)
+				</h5>
+				<line-chart :chart-data="statsData.absoluteCountPerTag" :height="100"></line-chart>
+
+				<v-divider class="mt-5 mb-5"></v-divider>
+			</div>
+
+			<h3 class="display-1 grey--text text--darken-1 text-xs-center ma-5">
+				Statystyki dla ofert zawierających wszystkie szukane technologie
+			</h3>
+
 			<h5 class="headline grey--text text--darken-1 text-xs-center mt-5 mb-3">
 				Ilość aktywnych ofert w czasie
 			</h5>
@@ -30,12 +43,15 @@
 			<doughnut-chart :chart-data="statsData.employers" :height="100">
 			</doughnut-chart>
 
+			<v-divider class="mt-5 mb-5"></v-divider>
+
 			<h5 class="headline grey--text text--darken-1 text-xs-center mt-5 mb-3">
 				Zbliżone (w modelu Word2Vec) technologie
 			</h5>
 			<v-layout row>
 				<v-flex xs4 offset-xs4 class="text-xs-center">
-					<v-chip v-for="tag in statsData.w2vTags" :key="tag" outline color="primary">{{ tag }}</v-chip>
+					<v-chip v-for="tag in statsData.w2vTags" :key="tag" outline color="primary" disabled>{{ tag }}
+					</v-chip>
 				</v-flex>
 			</v-layout>
 		</div>
@@ -51,6 +67,15 @@
 	import TagInput from '../components/TagInput.vue'
 	import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
 	import VDivider from 'vuetify/src/components/VDivider/VDivider'
+
+	const DOUGHNUT_PALETTE = [
+		'#FF4081', '#2196F3', '#FFC107', '#9C27B0', '#FF5722',
+		'#616161', '#009688', '#4CAF50', '#3F51B5', '#795548'
+	]
+
+	const COLOR_PALETTE = [
+		'rgba(248, 0, 86, 0.4)', 'rgba(16, 132, 246, 0.4)', 'rgba(254, 198, 0, 0.4)', 'rgba(156, 156, 156, 0.4)'
+	]
 
 	export default {
 		data () {
@@ -105,12 +130,17 @@
 								{
 									label: 'Pracodawcy',
 									data: res.data.employers.map(obj => obj.count),
-									backgroundColor: [
-										'#FF4081', '#2196F3', '#FFC107', '#9C27B0', '#FF5722',
-										'#616161', '#009688', '#4CAF50', '#3F51B5', '#795548'
-									]
+									backgroundColor: DOUGHNUT_PALETTE
 								}
 							]
+						},
+						absoluteCountPerTag: {
+							labels: res.data.dates,
+							datasets: res.data.offer_count_per_tag.map((dataset, index) => {
+								dataset.backgroundColor = DOUGHNUT_PALETTE[index % DOUGHNUT_PALETTE.length]
+								dataset.fill = false
+								return dataset
+							})
 						},
 						w2vTags: res.data.most_similar_tags
 					}

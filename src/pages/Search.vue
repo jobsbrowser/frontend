@@ -6,16 +6,22 @@
 		<tag-input class="mb-4" theme="pink"></tag-input>
 		<v-divider class="mb-4"></v-divider>
 
-		<div class="text-xs-right">
-			<v-btn
-				@click="downloadOffers()"
-				color="purple"
-				class="white--text mb-4"
-			>
-				Pobierz oferty
-				<v-icon right dark>get_app</v-icon>
-			</v-btn>
-		</div>
+		<v-layout row align-content-center>
+			<v-flex xs6>
+				<p v-if="offerCount !== undefined" class="ma-0">Znaleziono {{ offerCount }} ofert</p>
+			</v-flex>
+			<v-flex xs6 class="text-xs-right">
+				<v-btn
+					@click="downloadOffers()"
+					color="purple"
+					class="white--text mb-4"
+					:disabled="this.selectedTags.length == 0"
+				>
+					Pobierz oferty
+					<v-icon right dark>get_app</v-icon>
+				</v-btn>
+			</v-flex>
+		</v-layout>
 
 		<offer v-for="offer in offersList" :key="offer.offer_id" :offer="offer"></offer>
 
@@ -38,7 +44,8 @@
 				loading: false,
 				offersList: [],
 				pageNumber: 1,
-				hasMore: undefined
+				hasMore: undefined,
+				offerCount: undefined
 			}
 		},
 		components: {
@@ -68,6 +75,7 @@
 					this.loading = false
 					this.hasMore = res.data.has_more
 					this.pageNumber += 1
+					this.offerCount = res.data.total_count
 				})
 			},
 			checkScroll () {
@@ -95,6 +103,7 @@
 					this.loadOffers()
 				} else {
 					this.offersList = []
+					this.offerCount = undefined
 				}
 			}, 500)
 		},
