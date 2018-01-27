@@ -9,7 +9,7 @@ import store from './store'
 import axios from 'axios'
 import qs from 'qs'
 
-axios.defaults.baseURL = 'http://localhost:8000'
+axios.defaults.baseURL = 'http://138.68.66.216:8000'
 axios.defaults.paramsSerializer = function (params) {
 	return qs.stringify(params, {indices: false})
 }
