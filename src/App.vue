@@ -12,7 +12,15 @@
 		</v-content>
 		<v-footer app>
 			<span>&copy; 2018</span>
-			<span>&nbsp;&nbsp;Bartłomiej Sielicki, Łukasz Skarżyński</span>
+			<span>
+                &nbsp;&nbsp; MiNI  PW |
+                <a href="mailto:sielickib@student.mini.pw.edu.pl">
+                    Bartłomiej Sielicki
+                </a>,
+                <a href="mailto:skarzynskil@student.mini.pw.edu.pl">
+                    Łukasz Skarżyński
+                </a>
+            </span>
 		</v-footer>
 	</v-app>
 </template>
